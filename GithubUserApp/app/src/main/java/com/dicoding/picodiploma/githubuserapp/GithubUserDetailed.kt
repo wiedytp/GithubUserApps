@@ -6,7 +6,6 @@ import kotlinx.android.synthetic.main.item_githubuser_detailed.*
 import kotlinx.android.synthetic.main.item_row_githubuser.*
 
 
-
 class GithubUserDetailed : AppCompatActivity() {
 
 
@@ -15,5 +14,19 @@ class GithubUserDetailed : AppCompatActivity() {
         setContentView(R.layout.item_githubuser_detailed)
 
 
+
+    }
+
+    private fun showGithubUserList() {
+        val dataGithubUser = intent.getParcelableExtra("KEY_USER") as GithubUser
+
+       tv_detail_name.text = dataGithubUser.name
+        tv_detail_username.text = dataGithubUser.username
+        tv_detail_company.text = dataGithubUser.company
+        tv_detail_location.text = dataGithubUser.location
+        tv_detail_repository.text = dataGithubUser.repository.toString()
+        tv_detail_followers.text = dataGithubUser.followers.toString()
+        tv_detail_following.text = dataGithubUser.following.toString()
+        img_detail_photo.setImageResource(dataGithubUser.photo)
     }
 }

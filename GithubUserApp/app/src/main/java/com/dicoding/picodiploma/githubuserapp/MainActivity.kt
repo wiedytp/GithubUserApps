@@ -8,17 +8,23 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var rv_users: RecyclerView
+    private lateinit var listGithubUser: GithubUserAdapter
     private val list = ArrayList<GithubUser>()
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         rv_users = findViewById(R.id.rv_users)
         rv_users.setHasFixedSize(true)
 
         list.addAll(getListUsers())
         showRecyclerList()
+        setListClickAction()
     }
 
     fun getListUsers(): ArrayList<GithubUser> {
@@ -34,14 +40,14 @@ class MainActivity : AppCompatActivity() {
         val listUser = ArrayList<GithubUser>()
         for (position in dataName.indices) {
             val githubUser = GithubUser(
-                    dataName[position],
-                    dataUserName[position],
-                    dataCompany[position],
-                    dataLocation[position],
-                    dataRepository[position],
-                    dataFollowers[position],
-                    dataFollowing[position],
-                    dataPhoto.getResourceId(position, -1)
+                dataName[position],
+                dataUserName[position],
+                dataCompany[position],
+                dataLocation[position],
+                dataRepository[position],
+                dataFollowers[position],
+                dataFollowing[position],
+                dataPhoto.getResourceId(position, -1)
             )
             listUser.add(githubUser)
         }
@@ -54,13 +60,14 @@ class MainActivity : AppCompatActivity() {
         rv_users.adapter = githubUserAdapter
     }
 
-////     fun setListClickAction(){
-////        list.setOnItemClickCallBack (object : GithubUserAdapter.OnItemClickCallBack {
-////            override fun onItemClick(data : GithubUser) {
-////                val moveIntent = Intent (this@MainActivity, GithubUserDetailed::class.java )
-////                moveIntent.putExtra(KEY_USER, data)
-////                startActivity(moveIntent)
-////            }
-////        })
-//    }
+    fun setListClickAction() {
+        listGithubUser.setOnItemClickCallback(object : GithubUserAdapter.OnItemClickCallback {
+            override fun onItemClick(data: GithubUser) {
+                val moveIntent = Intent(this@MainActivity, GithubUserDetailed::class.java)
+                moveIntent.putExtra("KEY_USER", data)
+                startActivity(moveIntent)
+            }
+        })
+    }
+
 }

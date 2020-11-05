@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_githubuser_detailed.view.*
-import kotlinx.android.synthetic.main.item_row_githubuser.view.img_item_photo
+import kotlinx.android.synthetic.main.item_row_githubuser.view.*
 
 class GithubUserAdapter (private val listUser : ArrayList<GithubUser>) :
     RecyclerView.Adapter<GithubUserAdapter.ListViewHolder>() {
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     override fun onCreateViewHolder(
         viewGroup : ViewGroup,
@@ -25,6 +30,9 @@ class GithubUserAdapter (private val listUser : ArrayList<GithubUser>) :
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
        holder.bind(listUser[position])
+        holder.itemView.setOnClickListener {
+            onItemClickCallback.onItemClick(listUser[holder.adapterPosition])
+        }
     }
 
     class ListViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -39,6 +47,10 @@ class GithubUserAdapter (private val listUser : ArrayList<GithubUser>) :
                 tv_item_location.text = data.location
             }
         }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClick(data: GithubUser)
     }
 }
 
