@@ -1,73 +1,66 @@
 package com.dicoding.picodiploma.githubuserapp
 
 import android.content.Intent
-import android.content.res.TypedArray
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.ListView
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var adapter: GithubUserAdapter
-
-    private lateinit var dataName: Array<String>
-    private lateinit var dataUserName: Array<String>
-    private lateinit var dataCompany: Array<String>
-    private lateinit var dataLocation: Array<String>
-    private lateinit var dataFollowers: IntArray
-    private lateinit var dataFollowing: IntArray
-    private lateinit var dataRepository: IntArray
-    private lateinit var dataPhoto: TypedArray
-    private var githubUsers = arrayListOf<GithubUser>()
-
+    private lateinit var rv_users: RecyclerView
+    private val list = ArrayList<GithubUser>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = GithubUserAdapter(this)
-        rv_githubuser.adapter = adapter
+        rv_users = findViewById(R.id.rv_users)
+        rv_users.setHasFixedSize(true)
 
-        prepare()
-        addItem()
-
+        list.addAll(getListUsers())
+        showRecyclerList()
     }
 
-    private fun prepare() {
-        dataPhoto = resources.obtainTypedArray(R.array.avatar)
-        dataName = resources.getStringArray(R.array.name)
-        dataUserName = resources.getStringArray(R.array.username)
-        dataCompany = resources.getStringArray(R.array.company)
-        dataLocation = resources.getStringArray(R.array.location)
-        dataRepository = resources.getIntArray(R.array.repository)
-        dataFollowers = resources.getIntArray(R.array.followers)
-        dataFollowing = resources.getIntArray(R.array.following)
+    fun getListUsers(): ArrayList<GithubUser> {
+        val dataName = resources.getStringArray(R.array.name)
+        val dataUserName = resources.getStringArray(R.array.username)
+        val dataCompany = resources.getStringArray(R.array.company)
+        val dataLocation = resources.getStringArray(R.array.location)
+        val dataRepository = resources.getIntArray(R.array.repository)
+        val dataFollowers = resources.getIntArray(R.array.followers)
+        val dataFollowing = resources.getIntArray(R.array.following)
+        val dataPhoto = resources.obtainTypedArray(R.array.avatar)
 
-    }
-
-    private fun addItem() {
-        var data : GithubUser
+        val listUser = ArrayList<GithubUser>()
         for (position in dataName.indices) {
             val githubUser = GithubUser(
-                dataPhoto.getResourceId(position, -1),
-                dataName[position],
-                dataUserName[position],
-                dataCompany[position],
-                dataLocation[position],
-                dataRepository[position],
-                dataFollowers[position],
-                dataFollowing[position]
+                    dataName[position],
+                    dataUserName[position],
+                    dataCompany[position],
+                    dataLocation[position],
+                    dataRepository[position],
+                    dataFollowers[position],
+                    dataFollowing[position],
+                    dataPhoto.getResourceId(position, -1)
             )
-            data = githubUser
-            githubUsers.add(githubUser)
+            listUser.add(githubUser)
         }
-        adapter.githubUsers = githubUsers
-        rv_githubuser.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-
-        }
+        return listUser
     }
 
+    private fun showRecyclerList() {
+        rv_users.layoutManager = LinearLayoutManager(this)
+        val githubUserAdapter = GithubUserAdapter(list)
+        rv_users.adapter = githubUserAdapter
+    }
 
+////     fun setListClickAction(){
+////        list.setOnItemClickCallBack (object : GithubUserAdapter.OnItemClickCallBack {
+////            override fun onItemClick(data : GithubUser) {
+////                val moveIntent = Intent (this@MainActivity, GithubUserDetailed::class.java )
+////                moveIntent.putExtra(KEY_USER, data)
+////                startActivity(moveIntent)
+////            }
+////        })
+//    }
 }

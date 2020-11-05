@@ -8,6 +8,8 @@
     <string name="username">Username</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="values">values</string>
+    <string name="fullname">Full Name</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
