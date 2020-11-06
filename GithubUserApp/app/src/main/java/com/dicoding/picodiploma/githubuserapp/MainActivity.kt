@@ -3,8 +3,10 @@ package com.dicoding.picodiploma.githubuserapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.item_githubuser_detailed.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var rv_users: RecyclerView
@@ -17,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         rv_users = findViewById(R.id.rv_users)
         rv_users.setHasFixedSize(true)
@@ -56,8 +57,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun showRecyclerList() {
         rv_users.layoutManager = LinearLayoutManager(this)
-        val githubUserAdapter = GithubUserAdapter(list)
-        rv_users.adapter = githubUserAdapter
+listGithubUser = GithubUserAdapter(list)
+        rv_users.adapter = listGithubUser
     }
 
     fun setListClickAction() {
