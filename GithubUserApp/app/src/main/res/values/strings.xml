@@ -50,7 +50,7 @@
         <item>Jakarta Indonesia</item>
     </string-array>
 
-    <string-array name="repository">
+    <array name="repository">
         <item>102</item>
         <item>37</item>
         <item>9</item>
@@ -61,7 +61,7 @@
         <item>110</item>
         <item>1064</item>
         <item>65</item>
-    </string-array>
+    </array>
 
     <string-array name="company">
         <item>Google, Inc.</item>
@@ -76,7 +76,7 @@
         <item>Nusantara Beta Studio</item>
     </string-array>
 
-    <string-array name="followers">
+    <array name="followers">
         <item>56995</item>
         <item>5153</item>
         <item>7972</item>
@@ -87,9 +87,9 @@
         <item>178</item>
         <item>428</item>
         <item>465</item>
-    </string-array>
+    </array>
 
-    <string-array name="following">
+    <array name="following">
         <item>12</item>
         <item>2</item>
         <item>0</item>
@@ -100,7 +100,7 @@
         <item>23</item>
         <item>61</item>
         <item>10</item>
-    </string-array>
+    </array>
 
     <string-array name="avatar">
         <item>@drawable/user1</item>

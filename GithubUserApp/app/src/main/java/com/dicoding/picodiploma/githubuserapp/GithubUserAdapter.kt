@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.item_githubuser_detailed.view.*
 import kotlinx.android.synthetic.main.item_row_githubuser.view.*
 
 class GithubUserAdapter (private val listUser : ArrayList<GithubUser>) :

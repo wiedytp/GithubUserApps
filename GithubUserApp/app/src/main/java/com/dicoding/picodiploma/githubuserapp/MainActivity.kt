@@ -3,13 +3,11 @@ package com.dicoding.picodiploma.githubuserapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_githubuser_detailed.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var rv_users: RecyclerView
+    private lateinit var rvUsers: RecyclerView
     private lateinit var listGithubUser: GithubUserAdapter
     private val list = ArrayList<GithubUser>()
 
@@ -20,15 +18,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        rv_users = findViewById(R.id.rv_users)
-        rv_users.setHasFixedSize(true)
+        rvUsers = findViewById(R.id.rvUsers)
+        rvUsers.setHasFixedSize(true)
 
         list.addAll(getListUsers())
         showRecyclerList()
         setListClickAction()
     }
 
-    fun getListUsers(): ArrayList<GithubUser> {
+    private fun getListUsers(): ArrayList<GithubUser> {
         val dataName = resources.getStringArray(R.array.name)
         val dataUserName = resources.getStringArray(R.array.username)
         val dataCompany = resources.getStringArray(R.array.company)
@@ -56,12 +54,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerList() {
-        rv_users.layoutManager = LinearLayoutManager(this)
+        rvUsers.layoutManager = LinearLayoutManager(this)
 listGithubUser = GithubUserAdapter(list)
-        rv_users.adapter = listGithubUser
+        rvUsers.adapter = listGithubUser
     }
 
-    fun setListClickAction() {
+    private fun setListClickAction() {
         listGithubUser.setOnItemClickCallback(object : GithubUserAdapter.OnItemClickCallback {
             override fun onItemClick(data: GithubUser) {
                 val moveIntent = Intent(this@MainActivity, GithubUserDetailed::class.java)
